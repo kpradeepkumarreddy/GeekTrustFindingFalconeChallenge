@@ -5,6 +5,7 @@ After the recent Falicornian war, King Shan has exiled Queen Al Falcone for 15 y
 https://www.geektrust.in/coding-problem/frontend/space
 
 ![Alt text](/screenshot1.jpg?raw=true "screenshot1")
+![Alt text](/screenshot2.jpg?raw=true "screenshot2")
 ![Alt text](/screenshot3.jpg?raw=true "screenshot3")
 ![Alt text](/screenshot4.jpg?raw=true "screenshot4")
 ![Alt text](/screenshot5.jpg?raw=true "screenshot5")
