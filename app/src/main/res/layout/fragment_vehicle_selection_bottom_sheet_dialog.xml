@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".fragments.VehicleSelectionBottomSheetDialogFragment">
+
+    <LinearLayout
+        android:id="@+id/llVehicle1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvVehicle1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.70"
+            android:text="Vehicle1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvVehicle1Count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:text="count"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vehicle1separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/llVehicle1" />
+
+    <LinearLayout
+        android:id="@+id/llVehicle2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle1separator">
+
+        <TextView
+            android:id="@+id/tvVehicle2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.70"
+            android:text="Vehicle2"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvVehicle2Count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:text="Count"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vehicle2separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/llVehicle2" />
+
+    <LinearLayout
+        android:id="@+id/llVehicle3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle2separator">
+
+        <TextView
+            android:id="@+id/tvVehicle3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.70"
+            android:text="Vehicle3"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvVehicle3Count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:text="Count"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vehicle3separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/llVehicle3" />
+
+    <LinearLayout
+        android:id="@+id/llVehicle4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle3separator">
+
+        <TextView
+            android:id="@+id/tvVehicle4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.70"
+            android:text="Vehicle4"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvVehicle4Count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:text="Count"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vehicle4separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/llVehicle4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ R:/MyWorkSpace/event/event_stage_android/pre_event_student/app/src/main/res/values/integers.xml
+  ~ Kuldeep
+  ~ 10/5/17 5:18 PM
+  ~
+  ~ Copyright 2016 LXL Tech Pvt Ltd. All rights reserved.
+  ~ This software and documentation contain valuable trade
+  ~ secrets and proprietary property belonging to LXL Tech Pvt Ltd.
+  ~ None of this software and documentation may be copied,
+  ~ duplicated or disclosed without the express
+  ~ written permission of LXL Tech Pvt Ltd.
+  -->
+
+<resources>
+    <integer name="slide_animation_duration">300</integer>
+</resources>

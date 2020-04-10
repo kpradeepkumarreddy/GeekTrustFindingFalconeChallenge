@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="labelColor">#231F20</color>
+    <color name="newHintColor">#7f7f7f</color>
+    <color name="selectedLabelColor">#D3D3D3</color>
+    <color name="whiteTextColor">#ffffff</color>
+    <color name="red_100">#FFCDD2</color>
+</resources>

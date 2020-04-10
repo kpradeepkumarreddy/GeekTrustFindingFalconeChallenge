@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".fragments.DestinationSelectionBottomSheetFragment">
+
+    <TextView
+        android:id="@+id/tvDest1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Destination1"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dest1separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest1" />
+
+    <TextView
+        android:id="@+id/tvDest2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Destination2"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dest1separator" />
+
+    <View
+        android:id="@+id/dest2separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest2" />
+
+    <TextView
+        android:id="@+id/tvDest3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Destination3"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dest2separator" />
+
+    <View
+        android:id="@+id/dest3separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest3" />
+
+    <TextView
+        android:id="@+id/tvDest4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Destination4"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dest3separator" />
+
+    <View
+        android:id="@+id/dest4separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest4" />
+
+    <TextView
+        android:id="@+id/tvDest5"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Destination5"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dest4separator" />
+
+    <View
+        android:id="@+id/dest5separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest5" />
+
+    <TextView
+        android:id="@+id/tvDest6"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Destination6"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dest5separator" />
+
+    <View
+        android:id="@+id/dest6separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/newHintColor"
+        app:layout_constraintTop_toBottomOf="@id/tvDest6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
