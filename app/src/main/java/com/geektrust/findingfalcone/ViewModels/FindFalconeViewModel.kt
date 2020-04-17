@@ -105,6 +105,55 @@ class FindFalconeViewModel() : ViewModel() {
                 })
             }
         })
+    }
 
+    public fun getPlanetIndexOfSelectedDest(curSelectedDestination: String): Int {
+        var prevItemPos: Int = -1
+        try {
+            if (curSelectedDestination.isNotEmpty()) {
+                val dummyPlanetTO = PlanetsTO(curSelectedDestination, null, null)
+                prevItemPos = planetList?.indexOf(dummyPlanetTO)!!
+                Log.d("log", "prevItemPos = $prevItemPos")
+            }
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in getPlanetIndexOfSelectedDest()", ex)
+        }
+        return prevItemPos
+    }
+
+    public fun unselectPrevSelectedDest(curSelectedDestination: String) {
+        try {
+            val prevItemPos = getPlanetIndexOfSelectedDest(curSelectedDestination)
+            if (prevItemPos != -1) {
+                planetList?.get(prevItemPos)?.isSelected = false
+            }
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in unselectPrevSelectedDest()", ex)
+        }
+    }
+
+    public fun getVehicleIndexOfSelectedVehicle(curSelectedVehicle: String): Int {
+        var prevItemPos: Int = -1
+        try {
+            if (curSelectedVehicle.isNotEmpty()) {
+                val dummyVehicleTO = VehiclesTO(curSelectedVehicle, 0, 0, 0, false)
+                prevItemPos = vehicleList?.indexOf(dummyVehicleTO)!!
+            }
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in getVehicleIndexOfSelectedVehicle()", ex)
+        }
+        return prevItemPos
+    }
+
+    public fun unselectPrevSelectedVehicle(curSelectedVehicle: String) {
+        try {
+            val prevItemPos = getVehicleIndexOfSelectedVehicle(curSelectedVehicle)
+            Log.d("log", "prevItemPos = $prevItemPos")
+            if (prevItemPos != -1) {
+                vehicleList?.get(prevItemPos)?.vehiclesCount = vehicleList?.get(prevItemPos)?.vehiclesCount?.plus(1)!!
+            }
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in unselectPrevSelectedVehicle()", ex)
+        }
     }
 }

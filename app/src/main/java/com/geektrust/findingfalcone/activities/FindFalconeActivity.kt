@@ -14,8 +14,6 @@ import com.geektrust.findingfalcone.ViewModels.FindFalconeViewModel
 import com.geektrust.findingfalcone.callback_interfaces.BottomSheetItemSelectionInterface
 import com.geektrust.findingfalcone.fragments.DestinationSelectionBottomSheetFragment
 import com.geektrust.findingfalcone.fragments.VehicleSelectionBottomSheetDialogFragment
-import com.geektrust.findingfalcone.models.PlanetsTO
-import com.geektrust.findingfalcone.models.VehiclesTO
 import kotlinx.android.synthetic.main.activity_find_falcone.*
 
 class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomSheetItemSelectionInterface {
@@ -88,7 +86,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                         toast.show()
                         return
                     }
-                    val planetTOPos = getPlanetIndexOfSelectedDest(tietDest1.text.toString())
+                    val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest1.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
                         planetDistance = falconeViewModel.planetList?.get(planetTOPos)?.distance
@@ -107,7 +105,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                         toast.show()
                         return
                     }
-                    val planetTOPos = getPlanetIndexOfSelectedDest(tietDest2.text.toString())
+                    val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest2.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
                         planetDistance = falconeViewModel.planetList?.get(planetTOPos)?.distance
@@ -126,7 +124,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                         toast.show()
                         return
                     }
-                    val planetTOPos = getPlanetIndexOfSelectedDest(tietDest3.text.toString())
+                    val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest3.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
                         planetDistance = falconeViewModel.planetList?.get(planetTOPos)?.distance
@@ -145,7 +143,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                         toast.show()
                         return
                     }
-                    val planetTOPos = getPlanetIndexOfSelectedDest(tietDest4.text.toString())
+                    val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest4.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
                         planetDistance = falconeViewModel.planetList?.get(planetTOPos)?.distance
@@ -156,7 +154,9 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                 }
                 R.id.btnFindFalcone -> {
                     // check if any field is not selected
-                    checkIfAllFieldsAreSelected()
+                    if(!checkIfAllFieldsAreSelected()){
+                        return
+                    }
 
                     // based on the selected destinations and vehicles, calculate and populate the time taken field
                     // time taken = (planetDest1Distance/vehicleForDest1Speed) + (planetDest2Distance/vehicleForDest2Speed)
@@ -194,27 +194,6 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
             }
         } catch (ex: Exception) {
             Log.e("log", "Exception in onClick()", ex)
-        }
-    }
-
-    private fun setDataNeededForFindFalconeCall() {
-        try {
-            falconeViewModel.planetNames.clear()
-            falconeViewModel.vehicleNames.clear()
-
-            // setting the selected planet names to make the FindFalcone API call
-            falconeViewModel.planetNames.add(tietDest1.text.toString())
-            falconeViewModel.planetNames.add(tietDest2.text.toString())
-            falconeViewModel.planetNames.add(tietDest3.text.toString())
-            falconeViewModel.planetNames.add(tietDest4.text.toString())
-
-            // setting the selected vehicle names to make the FindFalcone API call
-            falconeViewModel.vehicleNames.add(tietVehicleForDest1.text.toString())
-            falconeViewModel.vehicleNames.add(tietVehicleForDest2.text.toString())
-            falconeViewModel.vehicleNames.add(tietVehicleForDest3.text.toString())
-            falconeViewModel.vehicleNames.add(tietVehicleForDest4.text.toString())
-        } catch (ex: Exception) {
-            Log.e("log", "Exception in setDataNeededForFindFalconeCall()", ex)
         }
     }
 
@@ -315,8 +294,8 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
     private fun timeTakenForPlanet1(): Int {
         try {
             if (tietDest1.text.toString().isNotEmpty() && tietVehicleForDest1.text.toString().isNotEmpty()) {
-                val planet1Pos = getPlanetIndexOfSelectedDest(tietDest1.text.toString())
-                val vehicle1Pos = getVehicleIndexOfSelectedVehicle(tietVehicleForDest1.text.toString())
+                val planet1Pos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest1.text.toString())
+                val vehicle1Pos = falconeViewModel.getVehicleIndexOfSelectedVehicle(tietVehicleForDest1.text.toString())
 
                 val t1 = falconeViewModel.planetList?.get(planet1Pos)?.distance?.div(
                         falconeViewModel.vehicleList?.get(vehicle1Pos)?.speed!!)!!
@@ -332,8 +311,8 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
     private fun timeTakenForPlanet2(): Int {
         try {
             if (tietDest2.text.toString().isNotEmpty() && tietVehicleForDest2.text.toString().isNotEmpty()) {
-                val planet2Pos = getPlanetIndexOfSelectedDest(tietDest2.text.toString())
-                val vehicle2Pos = getVehicleIndexOfSelectedVehicle(tietVehicleForDest2.text.toString())
+                val planet2Pos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest2.text.toString())
+                val vehicle2Pos = falconeViewModel.getVehicleIndexOfSelectedVehicle(tietVehicleForDest2.text.toString())
 
                 val t2 = falconeViewModel.planetList?.get(planet2Pos)?.distance?.div(
                         falconeViewModel.vehicleList?.get(vehicle2Pos)?.speed!!)!!
@@ -349,8 +328,8 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
     private fun timeTakenForPlanet3(): Int {
         try {
             if (tietDest3.text.toString().isNotEmpty() && tietVehicleForDest3.text.toString().isNotEmpty()) {
-                val planet3Pos = getPlanetIndexOfSelectedDest(tietDest3.text.toString())
-                val vehicle3Pos = getVehicleIndexOfSelectedVehicle(tietVehicleForDest3.text.toString())
+                val planet3Pos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest3.text.toString())
+                val vehicle3Pos = falconeViewModel.getVehicleIndexOfSelectedVehicle(tietVehicleForDest3.text.toString())
                 val t3 = falconeViewModel.planetList?.get(planet3Pos)?.distance?.div(
                         falconeViewModel.vehicleList?.get(vehicle3Pos)?.speed!!)!!
                 Log.d("log", "t3= $t3")
@@ -365,8 +344,8 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
     private fun timeTakenForPlanet4(): Int {
         try {
             if (tietDest4.text.toString().isNotEmpty() && tietVehicleForDest4.text.toString().isNotEmpty()) {
-                val planet4Pos = getPlanetIndexOfSelectedDest(tietDest4.text.toString())
-                val vehicle4Pos = getVehicleIndexOfSelectedVehicle(tietVehicleForDest4.text.toString())
+                val planet4Pos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest4.text.toString())
+                val vehicle4Pos = falconeViewModel.getVehicleIndexOfSelectedVehicle(tietVehicleForDest4.text.toString())
                 val t4 = falconeViewModel.planetList?.get(planet4Pos)?.distance?.div(
                         falconeViewModel.vehicleList?.get(vehicle4Pos)?.speed!!)!!
                 Log.d("log", "t4= $t4")
@@ -375,6 +354,27 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
             Log.e("log", "Exception in timeTakenForPlanet4()", ex)
         }
         return 0
+    }
+
+    private fun setDataNeededForFindFalconeCall() {
+        try {
+            falconeViewModel.planetNames.clear()
+            falconeViewModel.vehicleNames.clear()
+
+            // setting the selected planet names to make the FindFalcone API call
+            falconeViewModel.planetNames.add(tietDest1.text.toString())
+            falconeViewModel.planetNames.add(tietDest2.text.toString())
+            falconeViewModel.planetNames.add(tietDest3.text.toString())
+            falconeViewModel.planetNames.add(tietDest4.text.toString())
+
+            // setting the selected vehicle names to make the FindFalcone API call
+            falconeViewModel.vehicleNames.add(tietVehicleForDest1.text.toString())
+            falconeViewModel.vehicleNames.add(tietVehicleForDest2.text.toString())
+            falconeViewModel.vehicleNames.add(tietVehicleForDest3.text.toString())
+            falconeViewModel.vehicleNames.add(tietVehicleForDest4.text.toString())
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in setDataNeededForFindFalconeCall()", ex)
+        }
     }
 
     private fun clearErrors() {
@@ -400,7 +400,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     val prevSelectedDestination = tietDest1.text.toString()
                     Log.d("log", "prevSelectedDestination = $prevSelectedDestination")
                     // to unselect the previous selected item from the bottom sheet
-                    unselectPrevSelectedDest(prevSelectedDestination)
+                    falconeViewModel.unselectPrevSelectedDest(prevSelectedDestination)
                     tietDest1.setText(falconeViewModel.planetList?.get(pos)?.name)
                     selectedItemId = R.id.tietVehicleForDest1
                     selectedVehicle(-1)
@@ -409,7 +409,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     val prevSelectedDestination = tietDest2.text.toString()
                     Log.d("log", "prevSelectedDestination = $prevSelectedDestination")
                     // to unselect the previous selected item from the bottom sheet
-                    unselectPrevSelectedDest(prevSelectedDestination)
+                    falconeViewModel.unselectPrevSelectedDest(prevSelectedDestination)
                     tietDest2.setText(falconeViewModel.planetList?.get(pos)?.name)
                     selectedItemId = R.id.tietVehicleForDest2
                     selectedVehicle(-1)
@@ -418,7 +418,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     val prevSelectedDestination = tietDest3.text.toString()
                     Log.d("log", "prevSelectedDestination = $prevSelectedDestination")
                     // to unselect the previous selected item from the bottom sheet
-                    unselectPrevSelectedDest(prevSelectedDestination)
+                    falconeViewModel.unselectPrevSelectedDest(prevSelectedDestination)
                     tietDest3.setText(falconeViewModel.planetList?.get(pos)?.name)
                     selectedItemId = R.id.tietVehicleForDest3
                     selectedVehicle(-1)
@@ -427,7 +427,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     val prevSelectedDestination = tietDest4.text.toString()
                     Log.d("log", "prevSelectedDestination = $prevSelectedDestination")
                     // to unselect the previous selected item from the bottom sheet
-                    unselectPrevSelectedDest(prevSelectedDestination)
+                    falconeViewModel.unselectPrevSelectedDest(prevSelectedDestination)
                     tietDest4.setText(falconeViewModel.planetList?.get(pos)?.name)
                     selectedItemId = R.id.tietVehicleForDest4
                     selectedVehicle(-1)
@@ -438,39 +438,13 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
         }
     }
 
-    private fun getPlanetIndexOfSelectedDest(curSelectedDestination: String): Int {
-
-        var prevItemPos: Int = -1
-        try {
-            if (curSelectedDestination != null && curSelectedDestination.isNotEmpty()) {
-                val dummyPlanetTO = PlanetsTO(curSelectedDestination, null, null)
-                prevItemPos = falconeViewModel.planetList?.indexOf(dummyPlanetTO)!!
-                Log.d("log", "prevItemPos = $prevItemPos")
-            }
-        } catch (ex: Exception) {
-            Log.e("log", "Exception in getPlanetIndexOfSelectedDest()", ex)
-        }
-        return prevItemPos
-    }
-
-    private fun unselectPrevSelectedDest(curSelectedDestination: String) {
-        try {
-            val prevItemPos = getPlanetIndexOfSelectedDest(curSelectedDestination)
-            if (prevItemPos != null && prevItemPos != -1) {
-                falconeViewModel.planetList?.get(prevItemPos)?.isSelected = false
-            }
-        } catch (ex: Exception) {
-            Log.e("log", "Exception in unselectPrevSelectedDest()", ex)
-        }
-    }
-
     override fun selectedVehicle(pos: Int) {
         try {
             when (selectedItemId) {
                 R.id.tietVehicleForDest1 -> {
                     val prevSelectedVehicle = tietVehicleForDest1.text.toString()
                     Log.d("log", "prevSelectedVehicle = $prevSelectedVehicle")
-                    unselectPrevSelectedVehicle(prevSelectedVehicle)
+                    falconeViewModel.unselectPrevSelectedVehicle(prevSelectedVehicle)
                     if (pos == -1) {
                         tietVehicleForDest1.setText("")
                     } else {
@@ -483,7 +457,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                 R.id.tietVehicleForDest2 -> {
                     val prevSelectedVehicle = tietVehicleForDest2.text.toString()
                     Log.d("log", "prevSelectedVehicle = $prevSelectedVehicle")
-                    unselectPrevSelectedVehicle(prevSelectedVehicle)
+                    falconeViewModel.unselectPrevSelectedVehicle(prevSelectedVehicle)
                     if (pos == -1) {
                         tietVehicleForDest2.setText("")
                     } else {
@@ -496,7 +470,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                 R.id.tietVehicleForDest3 -> {
                     val prevSelectedVehicle = tietVehicleForDest3.text.toString()
                     Log.d("log", "prevSelectedVehicle = $prevSelectedVehicle")
-                    unselectPrevSelectedVehicle(prevSelectedVehicle)
+                    falconeViewModel.unselectPrevSelectedVehicle(prevSelectedVehicle)
                     if (pos == -1) {
                         tietVehicleForDest3.setText("")
                     } else {
@@ -509,7 +483,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                 R.id.tietVehicleForDest4 -> {
                     val prevSelectedVehicle = tietVehicleForDest4.text.toString()
                     Log.d("log", "prevSelectedVehicle = $prevSelectedVehicle")
-                    unselectPrevSelectedVehicle(prevSelectedVehicle)
+                    falconeViewModel.unselectPrevSelectedVehicle(prevSelectedVehicle)
                     if (pos == -1) {
                         tietVehicleForDest4.setText("")
                     } else {
@@ -522,32 +496,6 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
             }
         } catch (ex: Exception) {
             Log.e("log", "Exception in selectedVehicle()", ex)
-        }
-    }
-
-    private fun getVehicleIndexOfSelectedVehicle(curSelectedVehicle: String): Int {
-        var prevItemPos: Int = -1
-        try {
-            if (curSelectedVehicle != null && curSelectedVehicle.isNotEmpty()) {
-                val dummyVehicleTO = VehiclesTO(curSelectedVehicle, 0, 0, 0, false)
-                prevItemPos = falconeViewModel.vehicleList?.indexOf(dummyVehicleTO)!!
-            }
-        } catch (ex: Exception) {
-            Log.e("log", "Exception in getVehicleIndexOfSelectedVehicle()", ex)
-        }
-        return prevItemPos
-    }
-
-    private fun unselectPrevSelectedVehicle(curSelectedVehicle: String) {
-        try {
-            val prevItemPos = getVehicleIndexOfSelectedVehicle(curSelectedVehicle)
-            Log.d("log", "prevItemPos = $prevItemPos")
-            if (prevItemPos != null && prevItemPos != -1) {
-                falconeViewModel.vehicleList?.get(prevItemPos)?.vehiclesCount =
-                        falconeViewModel.vehicleList?.get(prevItemPos)?.vehiclesCount?.plus(1)!!
-            }
-        } catch (ex: Exception) {
-            Log.e("log", "Exception in unselectPrevSelectedVehicle()", ex)
         }
     }
 }
