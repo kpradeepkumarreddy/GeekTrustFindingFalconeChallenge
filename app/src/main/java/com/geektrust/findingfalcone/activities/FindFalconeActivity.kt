@@ -14,6 +14,7 @@ import com.geektrust.findingfalcone.ViewModels.FindFalconeViewModel
 import com.geektrust.findingfalcone.callback_interfaces.BottomSheetItemSelectionInterface
 import com.geektrust.findingfalcone.fragments.DestinationSelectionBottomSheetFragment
 import com.geektrust.findingfalcone.fragments.VehicleSelectionBottomSheetDialogFragment
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_find_falcone.*
 
 class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomSheetItemSelectionInterface {
@@ -77,15 +78,9 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     destSelectionBottomSheet.show(supportFragmentManager, destSelectionBottomSheet.tag)
                 }
                 R.id.tietVehicleForDest1 -> {
-                    if (tietDest1.text.toString().isEmpty()) {
-                        val toast = Toast.makeText(this, "Select the destination before choosing vehicle for " +
-                                "destination", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.view.findViewById<TextView>(android.R.id.message).setTextColor(resources.getColor(
-                                R.color.colorPrimary))
-                        toast.show()
-                        return
-                    }
+                    // check if destination is selected, before selecting the vehicle for destination
+                    if (!checkIfDestinationIsSelected(tietDest1)) return
+
                     val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest1.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
@@ -96,15 +91,9 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     vehicleSelectionBottomSheet.show(supportFragmentManager, vehicleSelectionBottomSheet.tag)
                 }
                 R.id.tietVehicleForDest2 -> {
-                    if (tietDest2.text.toString().isEmpty()) {
-                        val toast = Toast.makeText(this, "Select the destination before choosing vehicle for " +
-                                "destination", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.view.findViewById<TextView>(android.R.id.message).setTextColor(resources.getColor(
-                                R.color.colorPrimary))
-                        toast.show()
-                        return
-                    }
+                    // check if destination is selected, before selecting the vehicle for destination
+                    if (!checkIfDestinationIsSelected(tietDest2)) return
+
                     val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest2.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
@@ -115,15 +104,9 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     vehicleSelectionBottomSheet.show(supportFragmentManager, vehicleSelectionBottomSheet.tag)
                 }
                 R.id.tietVehicleForDest3 -> {
-                    if (tietDest3.text.toString().isEmpty()) {
-                        val toast = Toast.makeText(this, "Select the destination before choosing vehicle for " +
-                                "destination", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.view.findViewById<TextView>(android.R.id.message).setTextColor(resources.getColor(
-                                R.color.colorPrimary))
-                        toast.show()
-                        return
-                    }
+                    // check if destination is selected, before selecting the vehicle for destination
+                    if (!checkIfDestinationIsSelected(tietDest3)) return
+
                     val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest3.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
@@ -134,15 +117,9 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                     vehicleSelectionBottomSheet.show(supportFragmentManager, vehicleSelectionBottomSheet.tag)
                 }
                 R.id.tietVehicleForDest4 -> {
-                    if (tietDest4.text.toString().isEmpty()) {
-                        val toast = Toast.makeText(this, "Select the destination before choosing vehicle for " +
-                                "destination", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.view.findViewById<TextView>(android.R.id.message).setTextColor(resources.getColor(
-                                R.color.colorPrimary))
-                        toast.show()
-                        return
-                    }
+                    // check if destination is selected, before selecting the vehicle for destination
+                    if (!checkIfDestinationIsSelected(tietDest4)) return
+
                     val planetTOPos = falconeViewModel.getPlanetIndexOfSelectedDest(tietDest4.text.toString())
                     var planetDistance: Int? = null
                     if (planetTOPos != -1) {
@@ -154,7 +131,7 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
                 }
                 R.id.btnFindFalcone -> {
                     // check if any field is not selected
-                    if(!checkIfAllFieldsAreSelected()){
+                    if (!checkIfAllFieldsAreSelected()) {
                         return
                     }
 
@@ -195,6 +172,24 @@ class FindFalconeActivity : AppCompatActivity(), View.OnClickListener, BottomShe
         } catch (ex: Exception) {
             Log.e("log", "Exception in onClick()", ex)
         }
+    }
+
+    private fun checkIfDestinationIsSelected(tietDest: TextInputEditText): Boolean {
+        try {
+            if (tietDest.text.toString().isEmpty()) {
+                val toast = Toast.makeText(this, "Select the destination before choosing vehicle for " +
+                        "destination", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.view.findViewById<TextView>(android.R.id.message).setTextColor(resources.getColor(
+                        R.color.colorPrimary))
+                toast.show()
+                return false
+            }
+        } catch (ex: Exception) {
+            Log.e("log", "Exception in checkIfDestinationIsSelected()", ex)
+            return false
+        }
+        return true
     }
 
     private fun checkIfAllFieldsAreSelected(): Boolean {
